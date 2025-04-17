@@ -23,7 +23,7 @@ namespace HidSharp.Platform.MacOS
 {
     sealed class MacHidManager : HidManager
     {
-        protected override SystemEvents.EventManager CreateEventManager()
+        private protected override SystemEvents.EventManager CreateEventManager()
         {
             return new SystemEvents.MacOSEventManager();
         }

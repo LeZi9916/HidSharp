@@ -25,7 +25,7 @@ namespace HidSharp.Platform.Linux
 {
     sealed class LinuxHidManager : HidManager
     {
-        protected override SystemEvents.EventManager CreateEventManager()
+        private protected override SystemEvents.EventManager CreateEventManager()
         {
             return new SystemEvents.LinuxEventManager();
         }

@@ -65,7 +65,7 @@ namespace HidSharp.Platform
             EventManager.Start();
         }
 
-        internal virtual SystemEvents.EventManager CreateEventManager()
+        private protected virtual SystemEvents.EventManager CreateEventManager()
         {
             return new SystemEvents.DefaultEventManager();
         }
