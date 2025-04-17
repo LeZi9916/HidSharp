@@ -29,10 +29,11 @@ using System.Threading;
 using HidSharp.Experimental;
 using HidSharp.Utility;
 using Microsoft.Win32;
+using UnityEngine.XR;
 
 namespace HidSharp.Platform.Windows
 {
-    sealed class WinHidManager : HidManager
+    public sealed class WinHidManager : HidManager
     {
         #region Device Paths
         class DevicePathBase
@@ -102,6 +103,8 @@ namespace HidSharp.Platform.Windows
         //static Thread _bleDiscoveryThread;
         //static int _bleDiscoveryRefCount;
         //static volatile bool _bleDiscoveryShuttingDown;
+
+        static IntPtr _hwnd;
 
         static Thread _serialWatcherThread;
         static IntPtr _serialWatcherShutdownEvent;
@@ -210,6 +213,7 @@ namespace HidSharp.Platform.Windows
             readyCallback();
 
             NativeMethods.MSG msg;
+            _hwnd = hwnd;
             while (true)
             {
                 int result = NativeMethods.GetMessage(out msg, hwnd, 0, 0);
@@ -687,5 +691,16 @@ namespace HidSharp.Platform.Windows
         {
             get { return _isSupported; }
         }
+        public static void QuitThisBs()
+        {
+            uint WM_QUIT = 0x0012;
+            if (_hwnd != IntPtr.Zero)
+            {
+                PostMessage(_hwnd, WM_QUIT, IntPtr.Zero, IntPtr.Zero);
+            }
+        }
+
+        [DllImport("user32.dll")]
+        static extern bool PostMessage(IntPtr hWnd, uint Msg, IntPtr wParam, IntPtr lParam);
     }
 }

@@ -24,7 +24,7 @@ using HidSharp.Utility;
 
 namespace HidSharp.Platform
 {
-    abstract class HidManager
+    public abstract class HidManager
     {
         sealed class DeviceTypeInfo
         {
