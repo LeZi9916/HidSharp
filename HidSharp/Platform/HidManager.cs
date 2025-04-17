@@ -65,7 +65,7 @@ namespace HidSharp.Platform
             EventManager.Start();
         }
 
-        protected virtual SystemEvents.EventManager CreateEventManager()
+        internal virtual SystemEvents.EventManager CreateEventManager()
         {
             return new SystemEvents.DefaultEventManager();
         }
@@ -85,7 +85,7 @@ namespace HidSharp.Platform
             if (!condition) { throw new InvalidOperationException(error); }
         }
 
-        public virtual BleDiscovery BeginBleDiscovery()
+        internal virtual BleDiscovery BeginBleDiscovery()
         {
             throw new NotSupportedException();
         }
@@ -176,7 +176,7 @@ namespace HidSharp.Platform
             get { return false; }
         }
 
-        public SystemEvents.EventManager EventManager
+        internal SystemEvents.EventManager EventManager
         {
             get;
             private set;
